@@ -22,16 +22,15 @@ spec:
           emptyDir: {}
         - name: web-volume-3
           configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
             name: odoo-conf
+
       containers:
-      - name: web
+        name: web
         env:
           - name: DB_ENV_POSTGRES_USER
             value: odoo
-          - name: DB_ENV_POSTGRES_PASSWORD
-            value: odoo
-          - name: HOST
-            value: db-primary.odoo-db.svc
         ports:
           - containerPort: 8069
             protocol: TCP

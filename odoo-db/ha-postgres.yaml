@@ -5,9 +5,10 @@ metadata:
 spec:
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:centos8-13.5-0
   postgresVersion: 13
-  name: odoo
+  users:
+    - name: odoo
       databases:
-        - odoo
+      - odoo
       options: "SUPERUSER CREATEDB CREATEROLE REPLICATION BYPASSRLS"
   instances:
     - name: pgha1
@@ -43,7 +44,7 @@ spec:
             - "ReadWriteOnce"
             resources:
               requests:
-                storage: 1Gi
+                storage: 10Gi
   proxy:
     pgBouncer:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:centos8-1.16-0

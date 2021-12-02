@@ -1,30 +1,8 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: web
-  labels:
-    app: web-odoo
-spec:
-  ports:
-    - name: 8069-tcp
-      protocol: TCP
-      port: 8069
-      targetPort: 8069
-    - name: 8071-tcp
-      protocol: TCP
-      port: 8071
-      targetPort: 8071
-    - name: 8072-tcp
-      protocol: TCP
-      port: 8072
-      targetPort: 8072
-  selector:
-    deployment: web
----
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: odoo-conf
+  namespace: odoo-app
 data:
   odoo.conf: |
     [options]

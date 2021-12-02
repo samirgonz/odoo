@@ -6,20 +6,62 @@ metadata:
     app: web-odoo
 spec:
   ports:
-    - name: 8069-tcp
-      protocol: TCP
-      port: 8069
+    - protocol: TCP
+      port: 80
       targetPort: 8069
-    - name: 8071-tcp
-      protocol: TCP
-      port: 8071
-      targetPort: 8071
-    - name: 8072-tcp
-      protocol: TCP
-      port: 8072
-      targetPort: 8072
   selector:
-    deployment: web
+    app: web
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odooconfig
+  labels:
+    app: odooconfig
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ocs-storagecluster-cephfs
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odooaddons
+  labels:
+    app: odooaddons
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ocs-storagecluster-cephfs
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: odoolib
+  labels:
+    app: odoolib
+  annotations:
+    volume.beta.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ocs-storagecluster-cephfs
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 10Gi
 ---
 kind: ConfigMap
 apiVersion: v1
