@@ -1,0 +1,4 @@
+namespace: odoo-db
+
+resources:
+- ha-postgres.yaml
